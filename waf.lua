@@ -13,7 +13,7 @@ local http_cookie = ngx.var.http_cookie
 function log(module_name)
     local http_user_agent = http_user_agent or "-"
     local http_referer = http_referer or "-"
-    local line = string.format([[%s: %s [%s] "%s %s %s" "%s" "%s"]], module_name, remote_addr, localtime, request_method, request_uri, server_protocol, http_referer, http_user_agent )
+    local line = string.format([[%s: %s [%s] "%s %s %s" "%s" "%s"]] .. "\n", module_name, remote_addr, localtime, request_method, request_uri, server_protocol, http_referer, http_user_agent )
     log_fd:write(line)
     log_fd:flush()
 end
