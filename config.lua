@@ -63,3 +63,5 @@ block_cookie_chars = {
     "\\:",
     "\\.",
 }
+
+dymanic_block_ips_rate = 1000

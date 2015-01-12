@@ -1,4 +1,4 @@
-local localtime = ngx.localtime()
+local time_local = ngx.var.time_local
 
 local request_method = ngx.var.request_method
 local request_uri = ngx.var.request_uri
@@ -13,7 +13,7 @@ local http_cookie = ngx.var.http_cookie
 function log(module_name)
     local http_user_agent = http_user_agent or "-"
     local http_referer = http_referer or "-"
-    local line = string.format([[%s: %s [%s] "%s %s %s" "%s" "%s"]] .. "\n", module_name, remote_addr, localtime, request_method, request_uri, server_protocol, http_referer, http_user_agent )
+    local line = string.format([[%s: %s [%s] "%s %s %s" "%s" "%s"]] .. "\n", module_name, remote_addr, time_local, request_method, request_uri, server_protocol, http_referer, http_user_agent )
     log_fd:write(line)
     log_fd:flush()
 end
@@ -58,7 +58,18 @@ function block_cookie_chars_module()
     end
 end
 
+function dymanic_block_ips_module()
+    dymanic_block_ips_pool:safe_add(remote_addr, 1, 60, 0)
+    local access_num, err = dymanic_block_ips_pool:get(remote_addr)
+    if access_num and access_num > config.dymanic_block_ips_rate then
+        ngx.exit(403)
+    else
+        dymanic_block_ips_pool:incr(remote_addr, 1)
+    end
+end
+
 block_ips_module()
 block_url_chars_module()
 block_user_agents_module()
 block_cookie_chars_module()
+dymanic_block_ips_module()
