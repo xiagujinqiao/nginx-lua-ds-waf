@@ -8,11 +8,11 @@ A WAF based on openresty/lua-nginx-module
 Dependencies:
 ----
 
-openresty or nginx with openresty/lua-nginx-module
-couchdb
-Tieske/uuid
-mpx/lua-cjson
-pintsized/lua-resty-http
+- openresty or nginx with openresty/lua-nginx-module
+- couchdb
+- Tieske/uuid
+- mpx/lua-cjson
+- pintsized/lua-resty-http
 
 Installation:
 
