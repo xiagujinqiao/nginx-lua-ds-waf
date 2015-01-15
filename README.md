@@ -6,7 +6,7 @@ nginx-lua-ds-waf
 A WAF based on openresty/lua-nginx-module
 
 Dependencies:
-----
+-------------
 
 - openresty or nginx with openresty/lua-nginx-module
 - couchdb
@@ -15,6 +15,7 @@ Dependencies:
 - pintsized/lua-resty-http
 
 Installation:
+-------------
 
 将代码放在位于nginx根目录下的lua/nginx-lua-ds-waf/下
 
