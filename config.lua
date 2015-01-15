@@ -1,6 +1,10 @@
 module("config")
 
+mode = "enable"
+
 log_pwd = "/var/log/waf/"
+
+couchdb_url = "http://127.0.0.1:5984/"
 
 block_ips = {
     "111.111.111.111",
